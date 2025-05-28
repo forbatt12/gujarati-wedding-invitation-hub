@@ -59,15 +59,15 @@ const GuestRSVP = () => {
 
   if (!guest) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center">
-        <Card className="max-w-md mx-auto border-4 border-red-300">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 to-purple-50 flex items-center justify-center">
+        <Card className="max-w-md mx-auto border-4 border-rose-300">
           <CardContent className="p-8 text-center">
-            <h2 className="text-2xl font-bold text-red-800 mb-4">Guest Not Found</h2>
+            <h2 className="text-2xl font-bold text-purple-800 mb-4">Guest Not Found</h2>
             <p className="text-gray-600 mb-6">
               The RSVP link you're using is not valid or has expired.
             </p>
             <Link to="/">
-              <Button className="bg-orange-600 hover:bg-orange-700">
+              <Button className="bg-rose-600 hover:bg-rose-700">
                 Return to Home
               </Button>
             </Link>
@@ -79,9 +79,9 @@ const GuestRSVP = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center p-6">
-        <Card className="max-w-md w-full border-4 border-orange-300 shadow-xl">
-          <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center pb-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 to-purple-50 flex items-center justify-center p-6">
+        <Card className="max-w-md w-full border-4 border-rose-300 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white text-center pb-6">
             <div className="mx-auto mb-2 w-16 h-16 bg-white rounded-full flex items-center justify-center">
               <span className="text-2xl">✓</span>
             </div>
@@ -101,7 +101,7 @@ const GuestRSVP = () => {
             </p>
             <Button 
               onClick={() => setIsSubmitted(false)} 
-              className="bg-orange-600 hover:bg-orange-700 text-white"
+              className="bg-rose-600 hover:bg-rose-700 text-white"
             >
               Update RSVP
             </Button>
@@ -112,15 +112,15 @@ const GuestRSVP = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 to-purple-50 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
-        <Card className="border-4 border-orange-300 shadow-xl">
-          <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center">
+        <Card className="border-4 border-rose-300 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white text-center">
             <CardTitle className="text-2xl font-serif">Wedding RSVP</CardTitle>
           </CardHeader>
           <CardContent className="p-8">
-            <div className="text-center mb-8 border-b-2 border-orange-200 pb-4">
-              <h2 className="text-xl text-red-800 font-medium mb-2">
+            <div className="text-center mb-8 border-b-2 border-rose-200 pb-4">
+              <h2 className="text-xl text-purple-800 font-medium mb-2">
                 Namaste, {guest.name}!
               </h2>
               <p className="text-gray-600">
@@ -130,16 +130,16 @@ const GuestRSVP = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <Label className="text-lg font-medium text-orange-800">
+                <Label className="text-lg font-medium text-purple-800">
                   Will you be attending the wedding?
                 </Label>
                 <RadioGroup value={attending} onValueChange={setAttending} className="mt-3 space-y-3">
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="attending-yes" className="border-2 border-orange-300" />
+                    <RadioGroupItem value="yes" id="attending-yes" className="border-2 border-rose-300" />
                     <Label htmlFor="attending-yes" className="font-medium">Yes, I'll be there!</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="no" id="attending-no" className="border-2 border-orange-300" />
+                    <RadioGroupItem value="no" id="attending-no" className="border-2 border-rose-300" />
                     <Label htmlFor="attending-no" className="font-medium">No, I cannot attend</Label>
                   </div>
                 </RadioGroup>
@@ -147,7 +147,7 @@ const GuestRSVP = () => {
 
               {attending === "yes" && (
                 <div>
-                  <Label htmlFor="guestCount" className="text-lg font-medium text-orange-800">
+                  <Label htmlFor="guestCount" className="text-lg font-medium text-purple-800">
                     Number of guests (including you)
                   </Label>
                   <Input 
@@ -157,13 +157,13 @@ const GuestRSVP = () => {
                     onChange={(e) => setGuestCount(parseInt(e.target.value) || 1)}
                     min={1}
                     max={5}
-                    className="mt-2 border-2 border-orange-200"
+                    className="mt-2 border-2 border-rose-200"
                   />
                 </div>
               )}
 
               <div>
-                <Label htmlFor="message" className="text-lg font-medium text-orange-800">
+                <Label htmlFor="message" className="text-lg font-medium text-purple-800">
                   Message for the couple (optional)
                 </Label>
                 <Textarea 
@@ -171,11 +171,11 @@ const GuestRSVP = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Your wishes or message..."
-                  className="mt-2 border-2 border-orange-200"
+                  className="mt-2 border-2 border-rose-200"
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 text-lg font-medium">
+              <Button type="submit" className="w-full bg-rose-600 hover:bg-rose-700 text-white py-6 text-lg font-medium">
                 Submit RSVP
               </Button>
             </form>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { user, mail, edit, image } from "lucide-react";
+import { User, Mail, Edit, Image } from "lucide-react";
 
 const AdminDashboard = () => {
   const [guests, setGuests] = useState([
@@ -38,15 +38,15 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 to-purple-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-600 to-red-600 p-6 border-b-4 border-yellow-400 shadow-lg">
+      <div className="bg-gradient-to-r from-rose-600 to-purple-600 p-6 border-b-4 border-rose-400 shadow-lg">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <h1 className="text-3xl md:text-4xl font-bold text-white font-serif">
             Admin Dashboard
           </h1>
           <Link to="/">
-            <Button variant="outline" className="bg-white text-orange-600 hover:bg-orange-50">
+            <Button variant="outline" className="bg-white text-rose-600 hover:bg-rose-50 border-2 border-rose-300">
               Back to Home
             </Button>
           </Link>
@@ -55,27 +55,27 @@ const AdminDashboard = () => {
 
       <div className="max-w-6xl mx-auto p-6">
         <Tabs defaultValue="guests" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white border-2 border-orange-300">
-            <TabsTrigger value="guests" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
+          <TabsList className="grid w-full grid-cols-4 bg-white border-2 border-rose-300 shadow-md">
+            <TabsTrigger value="guests" className="data-[state=active]:bg-rose-500 data-[state=active]:text-white">
               Guest Management
             </TabsTrigger>
-            <TabsTrigger value="content" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
+            <TabsTrigger value="content" className="data-[state=active]:bg-rose-500 data-[state=active]:text-white">
               Website Content
             </TabsTrigger>
-            <TabsTrigger value="emails" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
+            <TabsTrigger value="emails" className="data-[state=active]:bg-rose-500 data-[state=active]:text-white">
               Email Templates
             </TabsTrigger>
-            <TabsTrigger value="responses" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
+            <TabsTrigger value="responses" className="data-[state=active]:bg-rose-500 data-[state=active]:text-white">
               RSVP Responses
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="guests" className="space-y-6">
             {/* Add new guest */}
-            <Card className="border-4 border-orange-300 shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <Card className="border-4 border-rose-300 shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white">
                 <CardTitle className="flex items-center gap-2">
-                  <user className="w-5 h-5" />
+                  <User className="w-5 h-5" />
                   Add New Guest
                 </CardTitle>
               </CardHeader>
@@ -88,7 +88,7 @@ const AdminDashboard = () => {
                       value={newGuestName}
                       onChange={(e) => setNewGuestName(e.target.value)}
                       placeholder="Enter guest name"
-                      className="border-2 border-orange-200 focus:border-orange-500"
+                      className="border-2 border-rose-200 focus:border-rose-500"
                     />
                   </div>
                   <div>
@@ -99,27 +99,27 @@ const AdminDashboard = () => {
                       value={newGuestEmail}
                       onChange={(e) => setNewGuestEmail(e.target.value)}
                       placeholder="Enter email address"
-                      className="border-2 border-orange-200 focus:border-orange-500"
+                      className="border-2 border-rose-200 focus:border-rose-500"
                     />
                   </div>
                 </div>
-                <Button onClick={addGuest} className="bg-orange-600 hover:bg-orange-700">
+                <Button onClick={addGuest} className="bg-rose-600 hover:bg-rose-700">
                   Add Guest
                 </Button>
               </CardContent>
             </Card>
 
             {/* Guest list */}
-            <Card className="border-4 border-orange-300 shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <Card className="border-4 border-rose-300 shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white">
                 <CardTitle>Guest List ({guests.length} guests)</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {guests.map((guest) => (
-                    <div key={guest.id} className="flex items-center justify-between p-4 bg-orange-50 rounded-lg border-2 border-orange-200">
+                    <div key={guest.id} className="flex items-center justify-between p-4 bg-rose-50 rounded-lg border-2 border-rose-200">
                       <div>
-                        <h3 className="font-medium text-red-800">{guest.name}</h3>
+                        <h3 className="font-medium text-purple-800">{guest.name}</h3>
                         <p className="text-sm text-gray-600">{guest.email}</p>
                         <span className={`inline-block px-2 py-1 text-xs rounded-full ${
                           guest.status === 'attending' ? 'bg-green-100 text-green-800' :
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
                         <Button
                           onClick={() => navigator.clipboard.writeText(generateRSVPLink(guest.id))}
                           size="sm"
-                          className="bg-blue-600 hover:bg-blue-700 text-white"
+                          className="bg-purple-600 hover:bg-purple-700 text-white"
                         >
                           Copy RSVP Link
                         </Button>
@@ -147,10 +147,10 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="content" className="space-y-6">
-            <Card className="border-4 border-orange-300 shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <Card className="border-4 border-rose-300 shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white">
                 <CardTitle className="flex items-center gap-2">
-                  <edit className="w-5 h-5" />
+                  <Edit className="w-5 h-5" />
                   Website Content Management
                 </CardTitle>
               </CardHeader>
@@ -158,26 +158,26 @@ const AdminDashboard = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="brideName">Bride Name</Label>
-                    <Input id="brideName" placeholder="Enter bride name" className="border-2 border-orange-200" />
+                    <Input id="brideName" placeholder="Enter bride name" className="border-2 border-rose-200" />
                   </div>
                   <div>
                     <Label htmlFor="groomName">Groom Name</Label>
-                    <Input id="groomName" placeholder="Enter groom name" className="border-2 border-orange-200" />
+                    <Input id="groomName" placeholder="Enter groom name" className="border-2 border-rose-200" />
                   </div>
                   <div>
                     <Label htmlFor="weddingDate">Wedding Date</Label>
-                    <Input id="weddingDate" type="date" className="border-2 border-orange-200" />
+                    <Input id="weddingDate" type="date" className="border-2 border-rose-200" />
                   </div>
                   <div>
                     <Label htmlFor="weddingTime">Wedding Time</Label>
-                    <Input id="weddingTime" type="time" className="border-2 border-orange-200" />
+                    <Input id="weddingTime" type="time" className="border-2 border-rose-200" />
                   </div>
                 </div>
                 <div>
                   <Label htmlFor="venue">Venue Details</Label>
-                  <Input id="venue" placeholder="Enter venue address" className="border-2 border-orange-200" />
+                  <Input id="venue" placeholder="Enter venue address" className="border-2 border-rose-200" />
                 </div>
-                <Button className="bg-orange-600 hover:bg-orange-700">
+                <Button className="bg-rose-600 hover:bg-rose-700">
                   Save Changes
                 </Button>
               </CardContent>
@@ -185,16 +185,16 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="emails" className="space-y-6">
-            <Card className="border-4 border-orange-300 shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <Card className="border-4 border-rose-300 shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white">
                 <CardTitle className="flex items-center gap-2">
-                  <mail className="w-5 h-5" />
+                  <Mail className="w-5 h-5" />
                   Email Template Management
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <p className="text-gray-600 mb-4">Email template customization will be available here.</p>
-                <Button className="bg-orange-600 hover:bg-orange-700">
+                <Button className="bg-rose-600 hover:bg-rose-700">
                   Edit Templates
                 </Button>
               </CardContent>
@@ -202,8 +202,8 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="responses" className="space-y-6">
-            <Card className="border-4 border-orange-300 shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <Card className="border-4 border-rose-300 shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-rose-500 to-purple-500 text-white">
                 <CardTitle>RSVP Response Summary</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
