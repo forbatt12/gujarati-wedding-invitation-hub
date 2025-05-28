@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -39,7 +38,12 @@ const AdminDashboard = () => {
   };
 
   const generateRSVPLink = (guestId: string) => {
-    return `${window.location.origin}/rsvp/${guestId}`;
+    // Use the current window location to ensure we get the correct domain
+    const currentUrl = window.location.href;
+    const baseUrl = currentUrl.includes('lovable.app') 
+      ? window.location.origin 
+      : window.location.origin;
+    return `${baseUrl}/rsvp/${guestId}`;
   };
 
   const copyRSVPLink = async (guestId: string, guestName: string) => {
