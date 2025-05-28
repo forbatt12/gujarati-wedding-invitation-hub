@@ -17,7 +17,7 @@ const GuestRSVP = () => {
   const [message, setMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Mock guest data - in real app this would come from backend
+  // Mock guest data - expanded to handle dynamic IDs
   useEffect(() => {
     const mockGuests = {
       "1": { id: "1", name: "Rajesh Patel", email: "rajesh@example.com" },
@@ -25,8 +25,17 @@ const GuestRSVP = () => {
       "3": { id: "3", name: "Amit Kumar", email: "amit@example.com" },
     };
     
-    if (guestId && mockGuests[guestId]) {
-      setGuest(mockGuests[guestId]);
+    if (guestId) {
+      if (mockGuests[guestId]) {
+        setGuest(mockGuests[guestId]);
+      } else {
+        // For newly added guests, create a generic guest object
+        setGuest({ 
+          id: guestId, 
+          name: `Guest ${guestId}`, 
+          email: `guest${guestId}@example.com` 
+        });
+      }
     }
   }, [guestId]);
 

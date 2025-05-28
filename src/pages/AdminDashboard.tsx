@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Mail, Edit, Copy, ExternalLink } from "lucide-react";
+import { User, Mail, Edit, Copy, ExternalLink, Users } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const AdminDashboard = () => {
@@ -17,17 +18,19 @@ const AdminDashboard = () => {
 
   const [newGuestName, setNewGuestName] = useState("");
   const [newGuestEmail, setNewGuestEmail] = useState("");
+  const [nextGuestId, setNextGuestId] = useState(4); // Start from 4 since we have guests 1-3
 
   const addGuest = () => {
     if (newGuestName && newGuestEmail) {
       const newGuest = {
-        id: Date.now().toString(),
+        id: nextGuestId.toString(),
         name: newGuestName,
         email: newGuestEmail,
         status: "pending",
         guestCount: 0
       };
       setGuests([...guests, newGuest]);
+      setNextGuestId(nextGuestId + 1);
       setNewGuestName("");
       setNewGuestEmail("");
       toast({
@@ -69,6 +72,11 @@ const AdminDashboard = () => {
     window.open(link, '_blank');
   };
 
+  // Calculate total attendees
+  const totalAttendees = guests.reduce((sum, guest) => {
+    return sum + (guest.status === 'attending' ? guest.guestCount + 1 : 0);
+  }, 0);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 to-purple-50">
       {/* Header */}
@@ -85,7 +93,20 @@ const AdminDashboard = () => {
         </div>
       </div>
 
+      {/* Total Attendees Card */}
       <div className="max-w-6xl mx-auto p-6">
+        <Card className="mb-6 border-4 border-purple-300 shadow-lg bg-gradient-to-r from-purple-100 to-rose-100">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-center gap-4">
+              <Users className="w-8 h-8 text-purple-600" />
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-purple-800">{totalAttendees}</h2>
+                <p className="text-lg text-purple-600 font-medium">Total People Attending</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <Tabs defaultValue="guests" className="space-y-6">
           <TabsList className="grid w-full grid-cols-4 bg-white border-2 border-rose-300 shadow-md">
             <TabsTrigger value="guests" className="data-[state=active]:bg-rose-500 data-[state=active]:text-white">
