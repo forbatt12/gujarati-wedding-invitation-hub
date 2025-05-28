@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'serif': ['Cambria', 'Georgia', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,6 +65,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Traditional Indian wedding colors
+				wedding: {
+					'red': '#D00000',
+					'maroon': '#8B0000',
+					'orange': '#FF6B35',
+					'gold': '#FFD700',
+					'cream': '#F5F5DC',
 				}
 			},
 			borderRadius: {
