@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Mail, Edit, Image } from "lucide-react";
+import { User, Mail, Edit, Copy, ExternalLink } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const AdminDashboard = () => {
   const [guests, setGuests] = useState([
@@ -30,11 +31,38 @@ const AdminDashboard = () => {
       setGuests([...guests, newGuest]);
       setNewGuestName("");
       setNewGuestEmail("");
+      toast({
+        title: "Guest Added Successfully! 🎉",
+        description: `${newGuestName} has been added to the guest list.`,
+      });
     }
   };
 
   const generateRSVPLink = (guestId: string) => {
     return `${window.location.origin}/rsvp/${guestId}`;
+  };
+
+  const copyRSVPLink = async (guestId: string, guestName: string) => {
+    const link = generateRSVPLink(guestId);
+    try {
+      await navigator.clipboard.writeText(link);
+      toast({
+        title: "Link Copied! 📋",
+        description: `RSVP link for ${guestName} has been copied to clipboard.`,
+      });
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+      toast({
+        title: "Copy Failed",
+        description: "Please manually copy the link from the address bar.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const openRSVPLink = (guestId: string) => {
+    const link = generateRSVPLink(guestId);
+    window.open(link, '_blank');
   };
 
   return (
@@ -129,14 +157,27 @@ const AdminDashboard = () => {
                           {guest.status === 'attending' ? 'Attending' :
                            guest.status === 'not-attending' ? 'Not Attending' : 'Pending'}
                         </span>
+                        <div className="text-xs text-gray-500 mt-1">
+                          RSVP Link: /rsvp/{guest.id}
+                        </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Button
-                          onClick={() => navigator.clipboard.writeText(generateRSVPLink(guest.id))}
+                          onClick={() => copyRSVPLink(guest.id, guest.name)}
                           size="sm"
                           className="bg-purple-600 hover:bg-purple-700 text-white"
                         >
-                          Copy RSVP Link
+                          <Copy className="w-4 h-4 mr-1" />
+                          Copy Link
+                        </Button>
+                        <Button
+                          onClick={() => openRSVPLink(guest.id)}
+                          size="sm"
+                          variant="outline"
+                          className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1" />
+                          Test Link
                         </Button>
                       </div>
                     </div>
